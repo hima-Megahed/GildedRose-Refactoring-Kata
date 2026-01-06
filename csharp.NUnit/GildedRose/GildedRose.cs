@@ -26,7 +26,7 @@ public class GildedRose(IList<Item> items)
             {
                 if (item.Quality < 50)
                 {
-                    item.Quality = item.Quality + 1;
+                    item.Quality += 1;
 
                     if (item.Name == BackstagePassesToATafkal80EtcConcert)
                     {
@@ -34,7 +34,7 @@ public class GildedRose(IList<Item> items)
                         {
                             if (item.Quality < 50)
                             {
-                                item.Quality = item.Quality + 1;
+                                item.Quality += 1;
                             }
                         }
 
@@ -42,7 +42,7 @@ public class GildedRose(IList<Item> items)
                         {
                             if (item.Quality < 50)
                             {
-                                item.Quality = item.Quality + 1;
+                                item.Quality += 1;
                             }
                         }
                     }
