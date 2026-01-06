@@ -14,7 +14,8 @@ public class GildedRose(IList<Item> items)
         {
             DecreaseNormalItemQuality(item);
 
-            UpdateAgedBirdOrBackStage(item);
+            IncreaseAgedBrieQuality(item);
+            IncreaseBackStagePassesQuality(item);
 
             DecreaseSellIn(item);
 
@@ -24,31 +25,27 @@ public class GildedRose(IList<Item> items)
 
     private static void DecreaseNormalItemQualityForPassedSellIn(Item item)
     {
-        if (item.SellIn < 0)
+        if (item.SellIn >= 0) return;
+        if (item.Name != AgedBrieItem)
         {
-            if (item.Name != AgedBrieItem)
+            if (item.Name != BackstagePasses)
             {
-                if (item.Name != BackstagePasses)
+                if (item.Quality <= 0) return;
+                if (item.Name != SulfurasHandOfRagnaros)
                 {
-                    if (item.Quality > 0)
-                    {
-                        if (item.Name != SulfurasHandOfRagnaros)
-                        {
-                            item.Quality--;
-                        }
-                    }
-                }
-                else
-                {
-                    item.Quality = 0;
+                    item.Quality--;
                 }
             }
             else
             {
-                if (item.Quality < 50)
-                {
-                    item.Quality++;
-                }
+                item.Quality = 0;
+            }
+        }
+        else
+        {
+            if (item.Quality < 50)
+            {
+                item.Quality++;
             }
         }
     }
@@ -59,12 +56,6 @@ public class GildedRose(IList<Item> items)
             item.Name is AgedBrieItem or BackstagePasses or SulfurasHandOfRagnaros) return;
 
         item.Quality--;
-    }
-
-    private void UpdateAgedBirdOrBackStage(Item item)
-    {
-        IncreaseAgedBirdQuality(item);
-        IncreaseBackStagePassesQuality(item);
     }
 
     private void IncreaseBackStagePassesQuality(Item item)
@@ -82,7 +73,7 @@ public class GildedRose(IList<Item> items)
             item.Quality += 1;
     }
 
-    private void IncreaseAgedBirdQuality(Item item)
+    private void IncreaseAgedBrieQuality(Item item)
     {
         if (item.Name == AgedBrieItem && item.Quality < 50)
             item.Quality += 1;
