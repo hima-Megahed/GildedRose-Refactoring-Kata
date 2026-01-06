@@ -43,7 +43,7 @@ public class GildedRose(IList<Item> items)
                     }
                     else
                     {
-                        item.Quality = item.Quality - item.Quality;
+                        item.Quality = 0;
                     }
                 }
                 else
