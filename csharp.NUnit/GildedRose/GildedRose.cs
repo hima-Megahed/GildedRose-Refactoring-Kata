@@ -12,18 +12,9 @@ public class GildedRose(IList<Item> items)
     {
         foreach (var item in items)
         {
-            if (item.Name != AgedBrieItem && item.Name != BackstagePasses)
-            {
-                if (item.Quality > 0)
-                {
-                    if (item.Name != SulfurasHandOfRagnaros)
-                    {
-                        item.Quality--;
-                    }
-                }
-            }
-            else
-                UpdateAgedBirdOrBackStage(item);
+            DecreaseNormalItemQuality(item);
+
+            UpdateAgedBirdOrBackStage(item);
 
             UpdateSellIn(item);
 
@@ -53,6 +44,18 @@ public class GildedRose(IList<Item> items)
                         item.Quality++;
                     }
                 }
+            }
+        }
+    }
+
+    private static void DecreaseNormalItemQuality(Item item)
+    {
+        if (item.Name is AgedBrieItem or BackstagePasses) return;
+        if (item.Quality > 0)
+        {
+            if (item.Name != SulfurasHandOfRagnaros)
+            {
+                item.Quality--;
             }
         }
     }
