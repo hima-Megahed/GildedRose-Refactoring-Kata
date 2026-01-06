@@ -83,6 +83,6 @@ public class GildedRose(IList<Item> items)
     {
         if (item.Name == SulfurasHandOfRagnaros)
             return;
-        item.SellIn -= 1;
+        item.SellIn--;
     }
 }
