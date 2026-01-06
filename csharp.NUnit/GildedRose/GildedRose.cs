@@ -27,13 +27,14 @@ public class GildedRose(IList<Item> items)
     {
         if (item.SellIn >= 0 || item.Quality <= 0) return;
         if (item.Name == SulfurasHandOfRagnaros) return;
-        IncreaseAgedBrieQuality(item);
 
+        IncreaseAgedBrieQuality(item);
         if (item.Name == AgedBrieItem) return;
-        if (item.Name != BackstagePasses)
-            item.Quality--;
-        else
+
+        if (item.Name == BackstagePasses)
             item.Quality = 0;
+        else
+            item.Quality--;
     }
 
     private static void DecreaseNormalItemQuality(Item item)
