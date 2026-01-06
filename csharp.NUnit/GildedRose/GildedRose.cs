@@ -62,6 +62,11 @@ public class GildedRose(IList<Item> items)
         if (item.Quality >= 50) return;
         item.Quality += 1;
 
+        HandleBackStagePassesSellInCases(item);
+    }
+
+    private void HandleBackStagePassesSellInCases(Item item)
+    {
         if (item.Name != BackstagePasses) return;
         if (item.SellIn < 11)
         {
