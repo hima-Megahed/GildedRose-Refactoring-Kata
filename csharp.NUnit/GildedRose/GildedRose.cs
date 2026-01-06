@@ -16,33 +16,38 @@ public class GildedRose(IList<Item> items)
 
             UpdateAgedBirdOrBackStage(item);
 
-            UpdateSellIn(item);
+            DecreaseSellIn(item);
 
-            if (item.SellIn < 0)
+            DecreaseNormalItemQualityForPassedSellIn(item);
+        }
+    }
+
+    private static void DecreaseNormalItemQualityForPassedSellIn(Item item)
+    {
+        if (item.SellIn < 0)
+        {
+            if (item.Name != AgedBrieItem)
             {
-                if (item.Name != AgedBrieItem)
+                if (item.Name != BackstagePasses)
                 {
-                    if (item.Name != BackstagePasses)
+                    if (item.Quality > 0)
                     {
-                        if (item.Quality > 0)
+                        if (item.Name != SulfurasHandOfRagnaros)
                         {
-                            if (item.Name != SulfurasHandOfRagnaros)
-                            {
-                                item.Quality--;
-                            }
+                            item.Quality--;
                         }
-                    }
-                    else
-                    {
-                        item.Quality = 0;
                     }
                 }
                 else
                 {
-                    if (item.Quality < 50)
-                    {
-                        item.Quality++;
-                    }
+                    item.Quality = 0;
+                }
+            }
+            else
+            {
+                if (item.Quality < 50)
+                {
+                    item.Quality++;
                 }
             }
         }
@@ -83,7 +88,7 @@ public class GildedRose(IList<Item> items)
             item.Quality += 1;
     }
 
-    private static void UpdateSellIn(Item item)
+    private static void DecreaseSellIn(Item item)
     {
         if (item.Name == SulfurasHandOfRagnaros)
             return;
