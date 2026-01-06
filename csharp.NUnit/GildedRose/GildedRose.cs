@@ -63,20 +63,20 @@ public class GildedRose(IList<Item> items)
         if (item.Quality >= 50) return;
         if (item.Name != BackstagePasses) return;
 
-        item.Quality += 1;
+        item.Quality++;
         if (item.Quality >= 50) return;
 
         if (item.SellIn <= 5)
-            item.Quality += 1;
+            item.Quality++;
 
         if (item.SellIn <= 10)
-            item.Quality += 1;
+            item.Quality++;
     }
 
     private void IncreaseAgedBrieQuality(Item item)
     {
         if (item.Name == AgedBrieItem && item.Quality < 50)
-            item.Quality += 1;
+            item.Quality++;
     }
 
     private static void DecreaseSellIn(Item item)
