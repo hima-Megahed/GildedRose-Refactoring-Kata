@@ -11,14 +11,11 @@ public class GildedRose(IList<Item> items)
     {
         foreach (var item in items)
         {
-            if (item.Name != AgedBrieItem && item.Name != BackstagePassesToATafkal80EtcConcert)
+            if (item.Name != AgedBrieItem && item.Name != BackstagePassesToATafkal80EtcConcert && item.Quality > 0)
             {
-                if (item.Quality > 0)
+                if (item.Name != "Sulfuras, Hand of Ragnaros")
                 {
-                    if (item.Name != "Sulfuras, Hand of Ragnaros")
-                    {
-                        item.Quality = item.Quality - 1;
-                    }
+                    item.Quality = item.Quality - 1;
                 }
             }
             else
