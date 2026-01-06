@@ -59,26 +59,24 @@ public class GildedRose(IList<Item> items)
 
     private void UpdateAgedBirdOrBackStage(Item item)
     {
-        if (item.Quality < 50)
+        if (item.Quality >= 50) return;
+        item.Quality += 1;
+
+        if (item.Name == BackstagePassesToATafkal80EtcConcert)
         {
-            item.Quality += 1;
-
-            if (item.Name == BackstagePassesToATafkal80EtcConcert)
+            if (item.SellIn < 11)
             {
-                if (item.SellIn < 11)
+                if (item.Quality < 50)
                 {
-                    if (item.Quality < 50)
-                    {
-                        item.Quality += 1;
-                    }
+                    item.Quality += 1;
                 }
+            }
 
-                if (item.SellIn < 6)
+            if (item.SellIn < 6)
+            {
+                if (item.Quality < 50)
                 {
-                    if (item.Quality < 50)
-                    {
-                        item.Quality += 1;
-                    }
+                    item.Quality += 1;
                 }
             }
         }
