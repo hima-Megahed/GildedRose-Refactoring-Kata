@@ -6,13 +6,13 @@ public class GildedRose(IList<Item> items)
 {
     private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
     private const string AgedBrieItem = "Aged Brie";
-    private const string BackstagePassesToATafkal80EtcConcert = "Backstage passes to a TAFKAL80ETC concert";
+    private const string BackstagePasses = "Backstage passes to a TAFKAL80ETC concert";
 
     public void UpdateQuality()
     {
         foreach (var item in items)
         {
-            if (item.Name != AgedBrieItem && item.Name != BackstagePassesToATafkal80EtcConcert)
+            if (item.Name != AgedBrieItem && item.Name != BackstagePasses)
             {
                 if (item.Quality > 0)
                 {
@@ -31,7 +31,7 @@ public class GildedRose(IList<Item> items)
             {
                 if (item.Name != AgedBrieItem)
                 {
-                    if (item.Name != BackstagePassesToATafkal80EtcConcert)
+                    if (item.Name != BackstagePasses)
                     {
                         if (item.Quality > 0)
                         {
@@ -62,7 +62,7 @@ public class GildedRose(IList<Item> items)
         if (item.Quality >= 50) return;
         item.Quality += 1;
 
-        if (item.Name != BackstagePassesToATafkal80EtcConcert) return;
+        if (item.Name != BackstagePasses) return;
         if (item.SellIn < 11)
         {
             if (item.Quality < 50)
@@ -71,12 +71,10 @@ public class GildedRose(IList<Item> items)
             }
         }
 
-        if (item.SellIn < 6)
+        if (item.SellIn >= 6) return;
+        if (item.Quality < 50)
         {
-            if (item.Quality < 50)
-            {
-                item.Quality += 1;
-            }
+            item.Quality += 1;
         }
     }
 
