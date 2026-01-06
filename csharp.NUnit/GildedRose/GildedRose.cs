@@ -70,14 +70,11 @@ public class GildedRose(IList<Item> items)
         if (item.Name != BackstagePasses) return;
         if (item.Quality >= 50) return;
 
-        if (item.SellIn <= 10)
+        if (item.SellIn <= 5)
             item.Quality += 1;
 
-        if (item.SellIn >= 6) return;
-        if (item.Quality < 50)
-        {
+        if (item.SellIn <= 10)
             item.Quality += 1;
-        }
     }
 
     private static void UpdateSellIn(Item item)
