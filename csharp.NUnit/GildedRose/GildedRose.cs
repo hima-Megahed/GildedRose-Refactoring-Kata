@@ -65,18 +65,17 @@ public class GildedRose(IList<Item> items)
 
     private void IncreaseBackStagePassesQuality(Item item)
     {
-        if (item.Name == BackstagePasses)
-        {
-            if (item.Quality >= 50) return;
+        if (item.Quality >= 50) return;
+        if (item.Name != BackstagePasses) return;
+
+        item.Quality += 1;
+        if (item.Quality >= 50) return;
+
+        if (item.SellIn <= 5)
             item.Quality += 1;
-            if (item.Quality >= 50) return;
 
-            if (item.SellIn <= 5)
-                item.Quality += 1;
-
-            if (item.SellIn <= 10)
-                item.Quality += 1;
-        }
+        if (item.SellIn <= 10)
+            item.Quality += 1;
     }
 
     private void IncreaseAgedBirdQuality(Item item)
