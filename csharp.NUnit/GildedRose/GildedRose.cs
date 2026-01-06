@@ -4,6 +4,7 @@ namespace GildedRoseKata;
 
 public class GildedRose(IList<Item> items)
 {
+    private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
     private const string AgedBrieItem = "Aged Brie";
     private const string BackstagePassesToATafkal80EtcConcert = "Backstage passes to a TAFKAL80ETC concert";
 
@@ -11,11 +12,14 @@ public class GildedRose(IList<Item> items)
     {
         foreach (var item in items)
         {
-            if (item.Name != AgedBrieItem && item.Name != BackstagePassesToATafkal80EtcConcert && item.Quality > 0)
+            if (item.Name != AgedBrieItem && item.Name != BackstagePassesToATafkal80EtcConcert)
             {
-                if (item.Name != "Sulfuras, Hand of Ragnaros")
+                if (item.Quality > 0)
                 {
-                    item.Quality = item.Quality - 1;
+                    if (item.Name != SulfurasHandOfRagnaros)
+                    {
+                        item.Quality = item.Quality - 1;
+                    }
                 }
             }
             else
@@ -45,10 +49,7 @@ public class GildedRose(IList<Item> items)
                 }
             }
 
-            if (item.Name != "Sulfuras, Hand of Ragnaros")
-            {
-                item.SellIn = item.SellIn - 1;
-            }
+            UpdateSellIn(item);
 
             if (item.SellIn < 0)
             {
@@ -58,7 +59,7 @@ public class GildedRose(IList<Item> items)
                     {
                         if (item.Quality > 0)
                         {
-                            if (item.Name != "Sulfuras, Hand of Ragnaros")
+                            if (item.Name != SulfurasHandOfRagnaros)
                             {
                                 item.Quality = item.Quality - 1;
                             }
@@ -78,5 +79,12 @@ public class GildedRose(IList<Item> items)
                 }
             }
         }
+    }
+
+    private static void UpdateSellIn(Item item)
+    {
+        if (item.Name == SulfurasHandOfRagnaros)
+            return;
+        item.SellIn -= 1;
     }
 }
