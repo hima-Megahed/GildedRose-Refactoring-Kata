@@ -4,11 +4,14 @@ namespace GildedRoseKata;
 
 public class GildedRose(IList<Item> items)
 {
+    private const string AgedBrieItem = "Aged Brie";
+    private const string BackstagePassesToATafkal80EtcConcert = "Backstage passes to a TAFKAL80ETC concert";
+
     public void UpdateQuality()
     {
         foreach (var item in items)
         {
-            if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
+            if (item.Name != AgedBrieItem && item.Name != BackstagePassesToATafkal80EtcConcert)
             {
                 if (item.Quality > 0)
                 {
@@ -24,7 +27,7 @@ public class GildedRose(IList<Item> items)
                 {
                     item.Quality = item.Quality + 1;
 
-                    if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+                    if (item.Name == BackstagePassesToATafkal80EtcConcert)
                     {
                         if (item.SellIn < 11)
                         {
@@ -52,9 +55,9 @@ public class GildedRose(IList<Item> items)
 
             if (item.SellIn < 0)
             {
-                if (item.Name != "Aged Brie")
+                if (item.Name != AgedBrieItem)
                 {
-                    if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
+                    if (item.Name != BackstagePassesToATafkal80EtcConcert)
                     {
                         if (item.Quality > 0)
                         {
