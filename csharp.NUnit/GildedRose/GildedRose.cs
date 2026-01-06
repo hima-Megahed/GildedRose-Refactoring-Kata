@@ -37,7 +37,7 @@ public class GildedRose(IList<Item> items)
                         {
                             if (item.Name != SulfurasHandOfRagnaros)
                             {
-                                item.Quality = item.Quality - 1;
+                                item.Quality--;
                             }
                         }
                     }
