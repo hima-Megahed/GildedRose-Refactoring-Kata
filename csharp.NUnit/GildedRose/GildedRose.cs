@@ -25,12 +25,15 @@ public class GildedRose(IList<Item> items)
 
     private static void DecreaseNormalItemQualityForPassedSellIn(Item item)
     {
-        if (item.SellIn >= 0) return;
+        if (item.SellIn >= 0 || item.Quality <= 0) return;
+
+        if (item.Name == AgedBrieItem && item.Quality < 50)
+            item.Quality++;
+
         if (item.Name != AgedBrieItem)
         {
             if (item.Name != BackstagePasses)
             {
-                if (item.Quality <= 0) return;
                 if (item.Name != SulfurasHandOfRagnaros)
                 {
                     item.Quality--;
@@ -39,13 +42,6 @@ public class GildedRose(IList<Item> items)
             else
             {
                 item.Quality = 0;
-            }
-        }
-        else
-        {
-            if (item.Quality < 50)
-            {
-                item.Quality++;
             }
         }
     }
