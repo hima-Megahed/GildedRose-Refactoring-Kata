@@ -2,88 +2,79 @@
 
 namespace GildedRoseKata;
 
-public class GildedRose
+public class GildedRose(IList<Item> items)
 {
-    IList<Item> Items;
-
-    public GildedRose(IList<Item> Items)
-    {
-        this.Items = Items;
-    }
+    private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
+    private const string AgedBrieItem = "Aged Brie";
+    private const string BackstagePasses = "Backstage passes to a TAFKAL80ETC concert";
 
     public void UpdateQuality()
     {
-        for (var i = 0; i < Items.Count; i++)
+        foreach (var item in items)
         {
-            if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
-            {
-                if (Items[i].Quality > 0)
-                {
-                    if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                    {
-                        Items[i].Quality = Items[i].Quality - 1;
-                    }
-                }
-            }
-            else
-            {
-                if (Items[i].Quality < 50)
-                {
-                    Items[i].Quality = Items[i].Quality + 1;
+            if (item.Name == SulfurasHandOfRagnaros) continue;
 
-                    if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
-                    {
-                        if (Items[i].SellIn < 11)
-                        {
-                            if (Items[i].Quality < 50)
-                            {
-                                Items[i].Quality = Items[i].Quality + 1;
-                            }
-                        }
+            UpdateQualityFor(item);
 
-                        if (Items[i].SellIn < 6)
-                        {
-                            if (Items[i].Quality < 50)
-                            {
-                                Items[i].Quality = Items[i].Quality + 1;
-                            }
-                        }
-                    }
-                }
-            }
+            DecreaseSellIn(item);
+            DecreaseItemQualityForPassedSellIn(item);
 
-            if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-            {
-                Items[i].SellIn = Items[i].SellIn - 1;
-            }
-
-            if (Items[i].SellIn < 0)
-            {
-                if (Items[i].Name != "Aged Brie")
-                {
-                    if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
-                    {
-                        if (Items[i].Quality > 0)
-                        {
-                            if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                            {
-                                Items[i].Quality = Items[i].Quality - 1;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Items[i].Quality = Items[i].Quality - Items[i].Quality;
-                    }
-                }
-                else
-                {
-                    if (Items[i].Quality < 50)
-                    {
-                        Items[i].Quality = Items[i].Quality + 1;
-                    }
-                }
-            }
+            ClipQuality(item);
         }
     }
+
+    private void UpdateQualityFor(Item item)
+    {
+        switch (item.Name)
+        {
+            case AgedBrieItem:
+                item.Quality++; //Increase Aged Brie
+                return;
+            case BackstagePasses:
+                IncreaseBackStagePassesQuality(item);
+                return;
+            default:
+                item.Quality--; // Decrease normal item quality
+                return;
+        }
+    }
+
+    private void DecreaseItemQualityForPassedSellIn(Item item)
+    {
+        if (item.SellIn >= 0) return;
+
+        switch (item.Name)
+        {
+            case AgedBrieItem:
+                item.Quality++;
+                break;
+            case BackstagePasses:
+                item.Quality = 0;
+                break;
+            default:
+                item.Quality--;
+                break;
+        }
+    }
+
+    private void IncreaseBackStagePassesQuality(Item item)
+    {
+        switch (item.SellIn)
+        {
+            case <= 5:
+                item.Quality += 3;
+                break;
+            case <= 10:
+                item.Quality += 2;
+                break;
+            default:
+                item.Quality++;
+                break;
+        }
+    }
+
+    private void DecreaseSellIn(Item item) => item.SellIn--;
+
+    private void ClipQuality(Item item) =>
+        item.Quality = item.Quality < 0 ? 0 : item.Quality > 50 ? 50 : item.Quality;
 }
