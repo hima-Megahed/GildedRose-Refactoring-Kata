@@ -16,8 +16,6 @@ public class GildedRose(IList<Item> items)
 
             UpdateQualityFor(item);
 
-            IncreaseBackStagePassesQuality(item);
-
             DecreaseSellIn(item);
             DecreaseItemQualityForPassedSellIn(item);
         }
@@ -31,6 +29,7 @@ public class GildedRose(IList<Item> items)
                 IncreaseAgedBrieQuality(item);
                 return;
             case BackstagePasses:
+                IncreaseBackStagePassesQuality(item);
                 return;
             default:
                 DecreaseNormalItemQuality(item);
