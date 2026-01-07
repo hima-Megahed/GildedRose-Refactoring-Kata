@@ -65,11 +65,5 @@ public class GildedRose(IList<Item> items)
             item.Quality++;
     }
 
-    private void IncreaseAgedBrieQuality(Item item)
-    {
-        if (item.Quality < 50)
-            item.Quality++;
-    }
-
     private void DecreaseSellIn(Item item) => item.SellIn--;
 }
