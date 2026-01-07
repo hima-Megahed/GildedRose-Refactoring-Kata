@@ -23,9 +23,6 @@ public class GildedRose(IList<Item> items)
         }
     }
 
-    private void ClipQuality(Item item) =>
-        item.Quality = item.Quality < 0 ? 0 : item.Quality > 50 ? 50 : item.Quality;
-
     private void UpdateQualityFor(Item item)
     {
         switch (item.Name)
@@ -44,7 +41,7 @@ public class GildedRose(IList<Item> items)
 
     private void DecreaseItemQualityForPassedSellIn(Item item)
     {
-        if (item.SellIn >= 0 || item.Quality <= 0 || item.Name == SulfurasHandOfRagnaros) return;
+        if (item.SellIn >= 0) return;
 
         if (item.Name == AgedBrieItem) item.Quality++;
         else if (item.Name == BackstagePasses) item.Quality = 0;
@@ -53,14 +50,22 @@ public class GildedRose(IList<Item> items)
 
     private void IncreaseBackStagePassesQuality(Item item)
     {
-        item.Quality++;
-
-        if (item.SellIn <= 5)
-            item.Quality++;
-
-        if (item.SellIn <= 10)
-            item.Quality++;
+        switch (item.SellIn)
+        {
+            case <= 5:
+                item.Quality += 3;
+                break;
+            case <= 10:
+                item.Quality += 2;
+                break;
+            default:
+                item.Quality++;
+                break;
+        }
     }
 
     private void DecreaseSellIn(Item item) => item.SellIn--;
+
+    private void ClipQuality(Item item) =>
+        item.Quality = item.Quality < 0 ? 0 : item.Quality > 50 ? 50 : item.Quality;
 }
