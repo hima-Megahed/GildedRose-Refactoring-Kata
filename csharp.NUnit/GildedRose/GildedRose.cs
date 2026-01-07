@@ -10,72 +10,61 @@ public class GildedRose(IList<Item> items)
 
     public void UpdateQuality()
     {
-        DecreaseNormalItemQuality();
-
-        IncreaseAgedBrieQuality();
-        IncreaseBackStagePassesQuality();
-
-        DecreaseSellIn();
-        DecreaseItemQualityForPassedSellIn();
-    }
-
-    private void DecreaseItemQualityForPassedSellIn()
-    {
         foreach (var item in items)
         {
-            if (item.SellIn >= 0 || item.Quality <= 0 || item.Name == SulfurasHandOfRagnaros) continue;
+            if (item.Name == SulfurasHandOfRagnaros) continue;
+            DecreaseNormalItemQuality(item);
 
-            if (item.Name == AgedBrieItem) IncreaseAgedBrieQuality();
-            else if (item.Name == BackstagePasses) item.Quality = 0;
-            else item.Quality--;
+            IncreaseAgedBrieQuality(item);
+            IncreaseBackStagePassesQuality(item);
+
+            DecreaseSellIn(item);
+            DecreaseItemQualityForPassedSellIn(item);
         }
     }
 
-    private void DecreaseNormalItemQuality()
+    private void DecreaseItemQualityForPassedSellIn(Item item)
     {
-        foreach (var item in items)
-        {
-            if (item.Quality <= 0 ||
-                item.Name is AgedBrieItem or BackstagePasses or SulfurasHandOfRagnaros) continue;
+        if (item.SellIn >= 0 || item.Quality <= 0 || item.Name == SulfurasHandOfRagnaros) return;
 
-            item.Quality--;
-        }
+        if (item.Name == AgedBrieItem) IncreaseAgedBrieQuality(item);
+        else if (item.Name == BackstagePasses) item.Quality = 0;
+        else item.Quality--;
     }
 
-    private void IncreaseBackStagePassesQuality()
+    private void DecreaseNormalItemQuality(Item item)
     {
-        foreach (var item in items)
-        {
-            if (item.Quality >= 50) continue;
-            if (item.Name != BackstagePasses) continue;
+        if (item.Quality <= 0 ||
+            item.Name is AgedBrieItem or BackstagePasses or SulfurasHandOfRagnaros) return;
 
+        item.Quality--;
+    }
+
+    private void IncreaseBackStagePassesQuality(Item item)
+    {
+        if (item.Quality >= 50) return;
+        if (item.Name != BackstagePasses) return;
+
+        item.Quality++;
+        if (item.Quality >= 50) return;
+
+        if (item.SellIn <= 5)
             item.Quality++;
-            if (item.Quality >= 50) continue;
 
-            if (item.SellIn <= 5)
-                item.Quality++;
-
-            if (item.SellIn <= 10)
-                item.Quality++;
-        }
+        if (item.SellIn <= 10)
+            item.Quality++;
     }
 
-    private void IncreaseAgedBrieQuality()
+    private void IncreaseAgedBrieQuality(Item item)
     {
-        foreach (var item in items)
-        {
-            if (item.Name == AgedBrieItem && item.Quality < 50)
-                item.Quality++;
-        }
+        if (item.Name == AgedBrieItem && item.Quality < 50)
+            item.Quality++;
     }
 
-    private void DecreaseSellIn()
+    private static void DecreaseSellIn(Item item)
     {
-        foreach (var item in items)
-        {
-            if (item.Name == SulfurasHandOfRagnaros)
-                continue;
-            item.SellIn--;
-        }
+        if (item.Name == SulfurasHandOfRagnaros)
+            return;
+        item.SellIn--;
     }
 }
