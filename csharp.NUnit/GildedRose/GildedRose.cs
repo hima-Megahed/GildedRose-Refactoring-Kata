@@ -72,8 +72,5 @@ public class GildedRose(IList<Item> items)
             item.Quality++;
     }
 
-    private static void DecreaseSellIn(Item item)
-    {
-        item.SellIn--;
-    }
+    private void DecreaseSellIn(Item item) => item.SellIn--;
 }
