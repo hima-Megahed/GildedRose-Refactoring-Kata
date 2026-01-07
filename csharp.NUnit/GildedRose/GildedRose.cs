@@ -18,8 +18,13 @@ public class GildedRose(IList<Item> items)
 
             DecreaseSellIn(item);
             DecreaseItemQualityForPassedSellIn(item);
+
+            ClipQuality(item);
         }
     }
+
+    private void ClipQuality(Item item) =>
+        item.Quality = item.Quality < 0 ? 0 : item.Quality > 50 ? 50 : item.Quality;
 
     private void UpdateQualityFor(Item item)
     {
