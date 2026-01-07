@@ -50,7 +50,6 @@ public class GildedRose(IList<Item> items)
     private void DecreaseNormalItemQuality(Item item)
     {
         if (item.Quality <= 0) return;
-
         item.Quality--;
     }
 
