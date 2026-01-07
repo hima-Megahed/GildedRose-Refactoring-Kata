@@ -51,11 +51,6 @@ public class GildedRose(IList<Item> items)
         else item.Quality--;
     }
 
-    private void DecreaseNormalItemQuality(Item item)
-    {
-        if (item.Quality <= 0) return;
-    }
-
     private void IncreaseBackStagePassesQuality(Item item)
     {
         if (item.Quality >= 50) return;
