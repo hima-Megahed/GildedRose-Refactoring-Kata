@@ -54,7 +54,6 @@ public class GildedRose(IList<Item> items)
     private void IncreaseBackStagePassesQuality(Item item)
     {
         item.Quality++;
-        if (item.Quality >= 50) return;
 
         if (item.SellIn <= 5)
             item.Quality++;
