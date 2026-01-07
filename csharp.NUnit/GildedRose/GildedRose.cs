@@ -43,9 +43,18 @@ public class GildedRose(IList<Item> items)
     {
         if (item.SellIn >= 0) return;
 
-        if (item.Name == AgedBrieItem) item.Quality++;
-        else if (item.Name == BackstagePasses) item.Quality = 0;
-        else item.Quality--;
+        switch (item.Name)
+        {
+            case AgedBrieItem:
+                item.Quality++;
+                break;
+            case BackstagePasses:
+                item.Quality = 0;
+                break;
+            default:
+                item.Quality--;
+                break;
+        }
     }
 
     private void IncreaseBackStagePassesQuality(Item item)
