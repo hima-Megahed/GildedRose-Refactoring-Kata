@@ -31,7 +31,7 @@ public class GildedRose(IList<Item> items)
         switch (item.Name)
         {
             case AgedBrieItem:
-                item.Quality++;
+                item.Quality++; //Increase Aged Brie
                 return;
             case BackstagePasses:
                 IncreaseBackStagePassesQuality(item);
@@ -46,7 +46,7 @@ public class GildedRose(IList<Item> items)
     {
         if (item.SellIn >= 0 || item.Quality <= 0 || item.Name == SulfurasHandOfRagnaros) return;
 
-        if (item.Name == AgedBrieItem) IncreaseAgedBrieQuality(item);
+        if (item.Name == AgedBrieItem) item.Quality++;
         else if (item.Name == BackstagePasses) item.Quality = 0;
         else item.Quality--;
     }
