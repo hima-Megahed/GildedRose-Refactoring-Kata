@@ -13,6 +13,8 @@ public class GildedRose(IList<Item> items)
         foreach (var item in items)
         {
             if (item.Name == SulfurasHandOfRagnaros) continue;
+
+            UpdateQualityFor(item);
             DecreaseNormalItemQuality(item);
 
             IncreaseAgedBrieQuality(item);
@@ -20,6 +22,19 @@ public class GildedRose(IList<Item> items)
 
             DecreaseSellIn(item);
             DecreaseItemQualityForPassedSellIn(item);
+        }
+    }
+
+    private void UpdateQualityFor(Item item)
+    {
+        switch (item.Name)
+        {
+            case AgedBrieItem:
+                return;
+            case BackstagePasses:
+                return;
+            default:
+                return;
         }
     }
 
