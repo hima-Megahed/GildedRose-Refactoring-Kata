@@ -37,7 +37,7 @@ public class GildedRose(IList<Item> items)
                 IncreaseBackStagePassesQuality(item);
                 return;
             default:
-                DecreaseNormalItemQuality(item);
+                item.Quality--; // Decrease normal item quality
                 return;
         }
     }
@@ -54,7 +54,6 @@ public class GildedRose(IList<Item> items)
     private void DecreaseNormalItemQuality(Item item)
     {
         if (item.Quality <= 0) return;
-        item.Quality--;
     }
 
     private void IncreaseBackStagePassesQuality(Item item)
