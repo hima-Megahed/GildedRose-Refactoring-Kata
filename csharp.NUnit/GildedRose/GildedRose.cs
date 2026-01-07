@@ -31,7 +31,7 @@ public class GildedRose(IList<Item> items)
         switch (item.Name)
         {
             case AgedBrieItem:
-                IncreaseAgedBrieQuality(item);
+                item.Quality++;
                 return;
             case BackstagePasses:
                 IncreaseBackStagePassesQuality(item);
