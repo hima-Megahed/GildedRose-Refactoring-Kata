@@ -15,7 +15,6 @@ public class GildedRose(IList<Item> items)
             if (item.Name == SulfurasHandOfRagnaros) continue;
 
             UpdateQualityFor(item);
-            //DecreaseNormalItemQuality(item);
 
             IncreaseAgedBrieQuality(item);
             IncreaseBackStagePassesQuality(item);
@@ -50,8 +49,7 @@ public class GildedRose(IList<Item> items)
 
     private void DecreaseNormalItemQuality(Item item)
     {
-        if (item.Quality <= 0 ||
-            item.Name is AgedBrieItem or BackstagePasses or SulfurasHandOfRagnaros) return;
+        if (item.Quality <= 0) return;
 
         item.Quality--;
     }
