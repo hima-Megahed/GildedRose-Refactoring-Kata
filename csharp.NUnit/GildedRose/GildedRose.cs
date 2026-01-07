@@ -69,7 +69,7 @@ public class GildedRose(IList<Item> items)
 
     private void IncreaseAgedBrieQuality(Item item)
     {
-        if (item.Name == AgedBrieItem && item.Quality < 50)
+        if (item.Quality < 50)
             item.Quality++;
     }
 
