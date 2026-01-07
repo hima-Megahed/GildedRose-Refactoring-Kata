@@ -75,8 +75,6 @@ public class GildedRose(IList<Item> items)
 
     private static void DecreaseSellIn(Item item)
     {
-        if (item.Name == SulfurasHandOfRagnaros)
-            return;
         item.SellIn--;
     }
 }
